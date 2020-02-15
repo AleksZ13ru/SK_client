@@ -18,12 +18,12 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import {mainListItems, secondaryListItems} from './listItems';
+import {mainListItems, secondaryListItems} from '../views/listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
-import Machine from "./Machine";
-import Fixes from "./Fixes";
+import Machine0 from "./Machine";
+import Fix from "./Fix/Fixes";
 
 function Copyright() {
     return (
@@ -196,7 +196,7 @@ export default function Dashboard() {
                         {/* Recent Orders */}
                         <Grid item xs={12}>
                             <Paper className={classes.paper}>
-                                <Fixes/>
+                                <Fix/>
                             </Paper>
                         </Grid>
                         <Grid item xs={12}>
