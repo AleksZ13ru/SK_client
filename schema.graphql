@@ -1,0 +1,116 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type CreateEvent {
+    machine: MachineType
+    postedBy: UserType
+    service: String
+    text: String
+}
+
+type CreateStatus {
+    comment: String
+    event: EventsType
+    postedBy: UserType
+    text: String
+}
+
+type CreateUser {
+    user: UserType
+}
+
+type EventsType {
+    id: ID!
+    machine: MachineType!
+    postedBy: UserType
+    service: String!
+    statuses: [StatusType!]!
+    text: String!
+}
+
+type MachineType {
+    comment: String!
+    events: [EventsType!]!
+    id: ID!
+    name: String!
+}
+
+type Mutation {
+    createEvent(machineId: Int, service: String, text: String): CreateEvent
+    createStatus(comment: String, eventId: Int, text: String): CreateStatus
+    createUser(email: String!, password: String!, username: String!): CreateUser
+    refreshToken(token: String!): Refresh
+    "Obtain JSON Web Token mutation"
+    tokenAuth(password: String!, username: String!): ObtainJSONWebToken
+    verifyToken(token: String!): Verify
+}
+
+"Obtain JSON Web Token mutation"
+type ObtainJSONWebToken {
+    token: String
+}
+
+type Query {
+    events: [EventsType]
+    machines: [MachineType]
+    me: UserType
+    statuses: [StatusType]
+    users: [UserType]
+}
+
+type Refresh {
+    payload: GenericScalar
+    token: String
+}
+
+type StatusType {
+    comment: String!
+    event: EventsType!
+    id: ID!
+    postedBy: UserType
+    postedDatetime: DateTime!
+    text: String!
+}
+
+type UserType {
+    dateJoined: DateTime!
+    email: String!
+    eventSet: [EventsType!]!
+    firstName: String!
+    id: ID!
+    "Designates whether this user should be treated as active. Unselect this instead of deleting accounts."
+    isActive: Boolean!
+    "Designates whether the user can log into this admin site."
+    isStaff: Boolean!
+    "Designates that this user has all permissions without explicitly assigning them."
+    isSuperuser: Boolean!
+    lastLogin: DateTime
+    lastName: String!
+    password: String!
+    statusSet: [StatusType!]!
+    "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+    username: String!
+}
+
+type Verify {
+    payload: GenericScalar
+}
+
+
+"""
+The `DateTime` scalar type represents a DateTime
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar DateTime
+
+"""
+The `GenericScalar` scalar type represents a generic
+GraphQL scalar value that could be:
+String, Boolean, Int, Float, List or Object.
+"""
+scalar GenericScalar

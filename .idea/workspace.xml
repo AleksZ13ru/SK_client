@@ -1,9 +1,214 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9e769d60-e172-45ab-bf6f-111a97b60087" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.graphqlconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schema.graphql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/LOGIN_MUTATION.graphql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/MACHINES_QUERY.graphql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/ME_QUERY.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Fix/Fix.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Fix/Fix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Machine/MachineAll.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Machine/MachineAll.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Machine/Machines.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Machine/Machines.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/SignInPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/SignInPage.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="GraphQL File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1XGKQdnfaGdFE8h8UhvEGKQOESS" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/hackernews" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="$USER_HOME$/.nvm/versions/node/v13.0.1/bin/node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/views" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/components" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.npm start">
+    <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="npm start" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9e769d60-e172-45ab-bf6f-111a97b60087" name="Default Changelist" comment="" />
+      <created>1580666975224</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1580666975224</updated>
+      <workItem from="1580666976798" duration="16303000" />
+      <workItem from="1581755784282" duration="1691000" />
+      <workItem from="1581779823375" duration="56000" />
+      <workItem from="1581860609156" duration="77000" />
+      <workItem from="1581862105255" duration="98000" />
+      <workItem from="1581862221121" duration="175000" />
+      <workItem from="1581862427238" duration="76000" />
+      <workItem from="1581862535235" duration="36000" />
+      <workItem from="1581862706427" duration="2000" />
+      <workItem from="1581862857956" duration="202000" />
+      <workItem from="1581863099132" duration="140000" />
+      <workItem from="1581863554756" duration="496000" />
+      <workItem from="1581864153789" duration="48000" />
+      <workItem from="1581867534317" duration="62000" />
+      <workItem from="1581868758174" duration="14000" />
+      <workItem from="1581868790209" duration="7000" />
+      <workItem from="1581869129839" duration="451000" />
+      <workItem from="1581869899528" duration="34000" />
+      <workItem from="1581869963255" duration="1633000" />
+      <workItem from="1581871629909" duration="10207000" />
+      <workItem from="1581969378981" duration="9305000" />
+      <workItem from="1582137301433" duration="259000" />
+    </task>
+    <task id="LOCAL-00001" summary="client_v1.0">
+      <created>1581755969233</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1581755969233</updated>
+    </task>
+    <task id="LOCAL-00002" summary="client_v1.0">
+      <created>1581756095575</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1581756095575</updated>
+    </task>
+    <task id="LOCAL-00003" summary="client_v2.0">
+      <created>1581757050084</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1581757050084</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="client_v1.0" />
+    <MESSAGE value="client_v2.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="client_v2.0" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1179" y="498" width="187" height="118" key="#com.intellij.ide.util.TreeDirectoryChooserDialog" timestamp="1581872238005">
+      <screen x="78" y="27" width="1842" height="1053" />
+    </state>
+    <state x="1179" y="498" width="187" height="118" key="#com.intellij.ide.util.TreeDirectoryChooserDialog/78.27.1842.1053@78.27.1842.1053" timestamp="1581872238005" />
+    <state x="2162" y="94" width="865" height="916" key="CommitChangelistDialog2" timestamp="1581757049814">
+      <screen x="1600" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2162" y="94" width="865" height="916" key="CommitChangelistDialog2/1600.0.1920.1080/79.27.1521.873@1600.0.1920.1080" timestamp="1581757049814" />
+    <state x="828" y="329" width="424" height="491" key="FileChooserDialogImpl" timestamp="1581884181217">
+      <screen x="78" y="27" width="1842" height="1053" />
+    </state>
+    <state x="2382" y="310" width="424" height="484" key="FileChooserDialogImpl/1600.0.1920.1080/79.27.1521.873@1600.0.1920.1080" timestamp="1580672574003" />
+    <state x="828" y="329" width="424" height="491" key="FileChooserDialogImpl/78.27.1842.1053@78.27.1842.1053" timestamp="1581884181217" />
+    <state x="829" y="329" width="424" height="484" key="FileChooserDialogImpl/79.27.1841.1053@79.27.1841.1053" timestamp="1581863594905" />
+    <state width="1796" height="259" key="GridCell.Tab.0.bottom" timestamp="1582137573485">
+      <screen x="78" y="27" width="1842" height="1053" />
+    </state>
+    <state width="1795" height="410" key="GridCell.Tab.0.bottom/1600.0.1920.1080/79.27.1521.873@1600.0.1920.1080" timestamp="1581756544954" />
+    <state width="1796" height="259" key="GridCell.Tab.0.bottom/78.27.1842.1053@78.27.1842.1053" timestamp="1582137573485" />
+    <state width="1796" height="259" key="GridCell.Tab.0.center" timestamp="1582137573485">
+      <screen x="78" y="27" width="1842" height="1053" />
+    </state>
+    <state width="1795" height="410" key="GridCell.Tab.0.center/1600.0.1920.1080/79.27.1521.873@1600.0.1920.1080" timestamp="1581756544954" />
+    <state width="1796" height="259" key="GridCell.Tab.0.center/78.27.1842.1053@78.27.1842.1053" timestamp="1582137573485" />
+    <state width="1796" height="259" key="GridCell.Tab.0.left" timestamp="1582137573484">
+      <screen x="78" y="27" width="1842" height="1053" />
+    </state>
+    <state width="1795" height="410" key="GridCell.Tab.0.left/1600.0.1920.1080/79.27.1521.873@1600.0.1920.1080" timestamp="1581756544954" />
+    <state width="1796" height="259" key="GridCell.Tab.0.left/78.27.1842.1053@78.27.1842.1053" timestamp="1582137573484" />
+    <state width="1796" height="259" key="GridCell.Tab.0.right" timestamp="1582137573485">
+      <screen x="78" y="27" width="1842" height="1053" />
+    </state>
+    <state width="1795" height="410" key="GridCell.Tab.0.right/1600.0.1920.1080/79.27.1521.873@1600.0.1920.1080" timestamp="1581756544954" />
+    <state width="1796" height="259" key="GridCell.Tab.0.right/78.27.1842.1053@78.27.1842.1053" timestamp="1582137573485" />
+    <state x="765" y="162" key="SettingsEditor" timestamp="1581863571103">
+      <screen x="79" y="27" width="1841" height="1053" />
+    </state>
+    <state x="765" y="162" key="SettingsEditor/79.27.1841.1053@79.27.1841.1053" timestamp="1581863571103" />
+    <state x="654" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1581867536167">
+      <screen x="78" y="27" width="1842" height="1053" />
+    </state>
+    <state x="654" y="380" key="com.intellij.ide.util.TipDialog/78.27.1842.1053@78.27.1842.1053" timestamp="1581867536167" />
+    <state x="655" y="380" key="com.intellij.ide.util.TipDialog/79.27.1841.1053@79.27.1841.1053" timestamp="1581863555733" />
   </component>
 </project>
