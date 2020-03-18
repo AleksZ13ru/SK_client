@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import clsx from 'clsx';
-import {makeStyles} from '@material-ui/core/styles';
+// import {makeStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
@@ -10,7 +10,7 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
+// import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 // import Grid from '@material-ui/core/Grid';
 // import Paper from '@material-ui/core/Paper';
@@ -32,6 +32,7 @@ import SignInPage from "./SignInPage";
 import {AUTH_TOKEN} from '../constants';
 import {Query} from 'react-apollo';
 import {loader} from 'graphql.macro';
+import MachinePage from "../components/MachinePage";
 // import Chart from '../components/Chart';
 // import Deposits from '../components/Deposits';
 // import Orders from '../components/Orders';
@@ -253,6 +254,10 @@ class Dashboard extends Component {
                             {/*<Route exact path="/analytics" component={Dashboard_analytics}/>*/}
                             {/*<Route exact path="/plan" component={Dashboard_plan}/>*/}
                             {/*<Route exact path="/fix" component={Dashboard_fix}/>*/}
+                            <Route path="/machine/:id"
+                                   render={(props)=><MachinePage {...props}/>}>
+                                {/*<PageCar/>*/}
+                            </Route>
                             <Route exact path="/sign-in" component={SignInPage}/>
                             <Route exact path="/machines" component={MachinesPage}/>
                             <Route exact path="/" component={ViewPage}/>

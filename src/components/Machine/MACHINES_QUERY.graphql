@@ -1,0 +1,16 @@
+query{
+    values{
+        edges{
+            node{
+                machine{
+                    id
+                    name
+                }
+                value
+                speed
+                kmv
+                status
+            }
+        }
+    }
+}

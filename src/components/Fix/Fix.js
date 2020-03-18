@@ -63,79 +63,25 @@ const data01 = [
 export default function Fix() {
     const classes = useStyles();
     return (
-        <Card>
-            <CardHeader
-                action={
-                    <Button
-                        color="primary"
-                        size="small"
-                        variant="outlined"
-                    >
-                        Добавить
-                    </Button>
-                }
-                title="Ремонты оборудования"
-                // subheader="Января 30, 2020"
-            />
-            <Divider/>
-            <CardContent>
-                <Table size="small">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Оборудование</TableCell>
-                            <TableCell>Время</TableCell>
-                            <TableCell>Служба</TableCell>
+        <Table size="small">
+            <TableHead>
+                <TableRow>
+                    <TableCell>Оборудование</TableCell>
+                    <TableCell>Время</TableCell>
+                    <TableCell>Служба</TableCell>
 
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map(row => (
-                            <TableRow key={row.id}>
-                                <TableCell>{row.name}</TableCell>
-                                <TableCell>{row.time}</TableCell>
-                                <TableCell>{row.service}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </CardContent>
-            <Divider/>
-            <CardActions>
-                <Button
-                    color="primary"
-                    size="small"
-                    variant="text"
-                    href='#'
-                >Посмотреть все<ArrowRightIcon/>
-                </Button>
-            </CardActions>
-        </Card>
-        // <React.Fragment>
-        //     <Title>Простои оборудования</Title>
-        //             <Table size="small">
-        //                 <TableHead>
-        //                     <TableRow>
-        //                         <TableCell>Оборудование</TableCell>
-        //                         <TableCell>Время</TableCell>
-        //                         <TableCell>Служба</TableCell>
-        //
-        //                     </TableRow>
-        //                 </TableHead>
-        //                 <TableBody>
-        //                     {rows.map(row => (
-        //                         <TableRow key={row.id}>
-        //                             <TableCell>{row.name}</TableCell>
-        //                             <TableCell>{row.time}</TableCell>
-        //                             <TableCell>{row.service}</TableCell>
-        //                         </TableRow>
-        //                     ))}
-        //                 </TableBody>
-        //             </Table>
-        //     <div className={classes.seeMore}>
-        //         <Link color="primary" href="#" onClick={preventDefault}>
-        //             Посмотреть все
-        //         </Link>
-        //     </div>
-        // </React.Fragment>
+                </TableRow>
+            </TableHead>
+            <TableBody>
+                {rows.map(row => (
+                    <TableRow key={row.id}>
+                        <TableCell>{row.name}</TableCell>
+                        <TableCell>{row.time}</TableCell>
+                        <TableCell>{row.service}</TableCell>
+                    </TableRow>
+                ))}
+            </TableBody>
+        </Table>
+
     );
 }

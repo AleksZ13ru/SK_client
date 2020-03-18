@@ -1,52 +1,48 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 // import Link from '@material-ui/core/Link';
 import {makeStyles} from '@material-ui/core/styles';
-// import Table from '@material-ui/core/Table';
-// import TableBody from '@material-ui/core/TableBody';
-// import TableCell from '@material-ui/core/TableCell';
-// import TableHead from '@material-ui/core/TableHead';
-// import TableRow from '@material-ui/core/TableRow';
-// import Title from "../Title";
-// import {Card} from "@material-ui/core";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import {Card} from "@material-ui/core";
 // import Button from "@material-ui/core/Button";
-// import CardHeader from "@material-ui/core/CardHeader";
-// import Divider from "@material-ui/core/Divider";
+import CardHeader from "@material-ui/core/CardHeader";
+import Divider from "@material-ui/core/Divider";
 // import ArrowRightIcon from "@material-ui/icons/ArrowRight";
-// import CardActions from "@material-ui/core/CardActions";
-// import CardContent from "@material-ui/core/CardContent";
-// import StatusBullet from "../StatusBullet";
-// import StatusIcon from "../StatusIcon/StatusIcon";
-// import Title from './Title';
-// import CheckIcon from '@material-ui/icons/Check';
-// import InfoIcon from '@material-ui/icons/Info';
-// import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-// import WarningIcon from '@material-ui/icons/Warning';
-// import CancelIcon from '@material-ui/icons/Cancel';
-import MaterialTable from "material-table";
-// import BookmarkIcon from '@material-ui/icons/Bookmark';
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import StatusIcon from "../StatusIcon/StatusIcon";
 
-// const statusColors = {
-//     green: 'success',
-//     blue: 'info',
-//     red: 'danger'
-// };
+import {Query} from 'react-apollo'
+import {loader} from 'graphql.macro';
+// import Link from "@material-ui/core/Link";
+
+const MACHINES_QUERY = loader('./MACHINES_QUERY.graphql');
+
+const statusColors = {
+    green: 'success',
+    blue: 'info',
+    red: 'danger'
+};
 
 // Generate Order Data
-function createData(id, name, speed, kmv, status_color) {
-    return {id, name, speed, kmv, status_color};
-}
+// function createData(id, name, speed, kmv, status_color) {
+//     return {id, name, speed, kmv, status_color};
+// }
 
 // const rows = [
 //     createData(0, 'FrigecoCu', '132 м/мин', '0.76', 'blue'),
 //     createData(1, 'FrigecoAl', '65 м/мин', '0.9', 'red'),
 //     createData(2, 'Matraff', '86 м/мин', '0.4', 'green'),
-//     // createData(3, 'FrigecoSLP120#1', '0 м/мин', '0.1'),
-//     // createData(4, 'FrigecoSLP120#2', '32 м/мин', '0.3'),
+//     createData(3, 'FrigecoSLP120#1', '0 м/мин', '0.1'),
+//     createData(4, 'FrigecoSLP120#2', '32 м/мин', '0.3'),
 // ];
 
-function preventDefault(event) {
-    event.preventDefault();
-}
+// function preventDefault(event) {
+//     event.preventDefault();
+// }
 
 const useStyles = makeStyles(theme => ({
     seeMore: {
@@ -54,79 +50,92 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function MachinesAll() {
+export default function MachineAll() {
     const classes = useStyles();
-    const [state, setState] = React.useState({
-        columns: [
-            {title: 'Оборудование', field: 'name'},
-            {title: 'Тип', field: 'surname'},
-            {title: 'Скорость, м/мин', field: 'speed', type: 'numeric'},
-            {title: 'КМВ', field: 'kmv', type: 'numeric'},
-            // {
-            //     title: 'Birth Place',
-            //     field: 'birthCity',
-            //     lookup: {34: 'İstanbul', 63: 'Şanlıurfa'},
-            // },
-        ],
-        data: [
-            {name: 'FrigecoCu', surname: 'Волочилка', speed: 132, kmv: 0.76},
-            {name: 'FrigecoAl', surname: 'Волочилка', speed: 65, kmv: 0.9},
-            {name: 'Matraff', surname: 'Волочилка', speed: 86, kmv: 0.4},
-        ],
-    });
+    const cellClicked = (rowNumber, columnId) => {
+        console.log('cell clicked!');
+        alert('cell clicked!')
+    };
+    const handleClick = (id, column) => {
+        return (event) => {
+            console.log(`You clicked on row with id ${id}, in column ${column}.`);
+        }
+    }
     return (
-        <MaterialTable
-            className={classes.seeMore}
-            title="Все оборудование"
-            columns={state.columns}
-            data={state.data}
-            editable={{
-                // onRowAdd: newData =>
-                //     new Promise(resolve => {
-                //         setTimeout(() => {
-                //             resolve();
-                //             setState(prevState => {
-                //                 const data = [...prevState.data];
-                //                 data.push(newData);
-                //                 return {...prevState, data};
-                //             });
-                //         }, 600);
-                //     }),
-                // onRowUpdate: (newData, oldData) =>
-                //     new Promise(resolve => {
-                //         setTimeout(() => {
-                //             resolve();
-                //             if (oldData) {
-                //                 setState(prevState => {
-                //                     const data = [...prevState.data];
-                //                     data[data.indexOf(oldData)] = newData;
-                //                     return {...prevState, data};
-                //                 });
-                //             }
-                //         }, 600);
-                //     }),
-                // onRowDelete: oldData =>
-                //     new Promise(resolve => {
-                //         setTimeout(() => {
-                //             resolve();
-                //             setState(prevState => {
-                //                 const data = [...prevState.data];
-                //                 data.splice(data.indexOf(oldData), 1);
-                //                 return {...prevState, data};
-                //             });
-                //         }, 600);
-                //     }),
-            }}
-            actions={[
-                {
-                    icon: 'bookmark',
-                    tooltip: 'В избранное',
-                    onClick: (event, rowData) => alert("В избранное" + rowData.name)
-                }
-            ]}
-        />
+        <Card>
+            <CardHeader
+                // action={
+                //     <Button
+                //         color="primary"
+                //         size="small"
+                //         variant="outlined"
+                //     >
+                //         Новый заказ
+                //     </Button>
+                // }
+                title="Оборудование"
+                // subheader="September 14, 2016"
+            />
+            <Divider/>
+            <CardContent>
+                <Table size="small">
+                    <TableHead>
+                        <TableRow>
+                            {/*<TableCell><WarningIcon fontSize="small" color="error"/></TableCell>*/}
+                            <TableCell></TableCell>
+                            <TableCell>Оборудование</TableCell>
+                            <TableCell>Скорость, м/мин</TableCell>
+                            <TableCell>КМВ, %</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        <Query query={MACHINES_QUERY}>
+                            {({loading, error, data}) => {
+                                if (loading) return <div>Fetching</div>;
+                                if (error) return <div>Error</div>;
+                                const values = data.values.edges;
+
+                                return (
+                                    <Fragment>
+                                        {values.map((value, index) => (
+                                            <TableRow
+                                                key={value.node.machine.id}
+                                                onClick={handleClick(value.node.machine.id, "calories")}
+                                            >
+                                                <TableCell>
+                                                    <div className={classes.statusContainer}>
+                                                    <StatusIcon
+                                                        className={classes.status}
+                                                        color={statusColors[value.node.status]}
+                                                        size="sm"
+                                                    />
+                                                    {/*{value.node.status}*/}
+                                                    </div>
+                                                </TableCell>
+                                                <TableCell
+                                                    >
+                                                    {/*<Link href="#">*/}
+                                                    {value.node.machine.name}
+                                                    {/*</Link>*/}
+                                                </TableCell>
+                                                <TableCell>{value.node.speed}</TableCell>
+                                                <TableCell>{value.node.kmv}</TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </Fragment>
+
+                                )
+                            }}
+
+                        </Query>
+                    </TableBody>
+                </Table>
+            </CardContent>
+            <Divider/>
+            <CardActions>
+
+            </CardActions>
+        </Card>
 
     );
 }
-
-

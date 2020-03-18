@@ -5,43 +5,65 @@ schema {
     mutation: Mutation
 }
 
-type CreateEvent {
-    machine: MachineType
-    postedBy: UserType
-    service: String
-    text: String
-}
-
-type CreateStatus {
-    comment: String
-    event: EventsType
-    postedBy: UserType
-    text: String
+"An object with an ID"
+interface Node {
+    "The ID of the object."
+    id: ID!
 }
 
 type CreateUser {
     user: UserType
 }
 
-type EventsType {
+type EventsType implements Node {
+    "The ID of the object."
     id: ID!
     machine: MachineType!
     postedBy: UserType
-    service: String!
-    statuses: [StatusType!]!
+    statuses(after: String, before: String, first: Int, last: Int, postedBy: ID): StatusTypeConnection!
     text: String!
 }
 
-type MachineType {
+type EventsTypeConnection {
+    "Contains the nodes in this connection."
+    edges: [EventsTypeEdge]!
+    "Pagination data for this connection."
+    pageInfo: PageInfo!
+}
+
+"A Relay edge containing a `EventsType` and its cursor."
+type EventsTypeEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: EventsType
+}
+
+type MachineType implements Node {
     comment: String!
-    events: [EventsType!]!
+    events(after: String, before: String, first: Int, last: Int, machine_Name: String, services: [ID]): EventsTypeConnection!
+    "The ID of the object."
     id: ID!
     name: String!
+    values(after: String, before: String, day: Date, first: Int, last: Int, machine_Name: String): ValueTypeConnection!
+}
+
+type MachineTypeConnection {
+    "Contains the nodes in this connection."
+    edges: [MachineTypeEdge]!
+    "Pagination data for this connection."
+    pageInfo: PageInfo!
+}
+
+"A Relay edge containing a `MachineType` and its cursor."
+type MachineTypeEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: MachineType
 }
 
 type Mutation {
-    createEvent(machineId: Int, service: String, text: String): CreateEvent
-    createStatus(comment: String, eventId: Int, text: String): CreateStatus
     createUser(email: String!, password: String!, username: String!): CreateUser
     refreshToken(token: String!): Refresh
     "Obtain JSON Web Token mutation"
@@ -54,12 +76,33 @@ type ObtainJSONWebToken {
     token: String
 }
 
+"The Relay compliant `PageInfo` type, containing data necessary to paginate this connection."
+type PageInfo {
+    "When paginating forwards, the cursor to continue."
+    endCursor: String
+    "When paginating forwards, are there more items?"
+    hasNextPage: Boolean!
+    "When paginating backwards, are there more items?"
+    hasPreviousPage: Boolean!
+    "When paginating backwards, the cursor to continue."
+    startCursor: String
+}
+
 type Query {
-    events: [EventsType]
-    machines: [MachineType]
+    "The ID of the object"
+    event(id: ID!): EventsType
+    events(after: String, before: String, first: Int, last: Int, machine_Name: String, services: [ID]): EventsTypeConnection
+    "The ID of the object"
+    machine(id: ID!): MachineType
+    machines(after: String, before: String, comment: String, comment_Icontains: String, comment_Istartswith: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): MachineTypeConnection
     me: UserType
-    statuses: [StatusType]
+    "The ID of the object"
+    status(id: ID!): StatusType
+    statuses(after: String, before: String, first: Int, last: Int, postedBy: ID): StatusTypeConnection
     users: [UserType]
+    "The ID of the object"
+    value(id: ID!): ValueType
+    values(after: String, before: String, day: Date, first: Int, last: Int, machine_Name: String): ValueTypeConnection
 }
 
 type Refresh {
@@ -67,19 +110,35 @@ type Refresh {
     token: String
 }
 
-type StatusType {
+type StatusType implements Node {
     comment: String!
     event: EventsType!
+    "The ID of the object."
     id: ID!
     postedBy: UserType
     postedDatetime: DateTime!
     text: String!
 }
 
+type StatusTypeConnection {
+    "Contains the nodes in this connection."
+    edges: [StatusTypeEdge]!
+    "Pagination data for this connection."
+    pageInfo: PageInfo!
+}
+
+"A Relay edge containing a `StatusType` and its cursor."
+type StatusTypeEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: StatusType
+}
+
 type UserType {
     dateJoined: DateTime!
     email: String!
-    eventSet: [EventsType!]!
+    eventSet(after: String, before: String, first: Int, last: Int, machine_Name: String, services: [ID]): EventsTypeConnection!
     firstName: String!
     id: ID!
     "Designates whether this user should be treated as active. Unselect this instead of deleting accounts."
@@ -91,15 +150,48 @@ type UserType {
     lastLogin: DateTime
     lastName: String!
     password: String!
-    statusSet: [StatusType!]!
+    statusSet(after: String, before: String, first: Int, last: Int, postedBy: ID): StatusTypeConnection!
     "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
     username: String!
+}
+
+type ValueType implements Node {
+    day: Date!
+    "The ID of the object."
+    id: ID!
+    kmv: Float
+    machine: MachineType!
+    speed: Int
+    status: String
+    value: String!
+}
+
+type ValueTypeConnection {
+    "Contains the nodes in this connection."
+    edges: [ValueTypeEdge]!
+    "Pagination data for this connection."
+    pageInfo: PageInfo!
+}
+
+"A Relay edge containing a `ValueType` and its cursor."
+type ValueTypeEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: ValueType
 }
 
 type Verify {
     payload: GenericScalar
 }
 
+
+"""
+The `Date` scalar type represents a Date
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar Date
 
 """
 The `DateTime` scalar type represents a DateTime

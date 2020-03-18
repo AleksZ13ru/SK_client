@@ -28,7 +28,7 @@ export default function MachinesPage() {
     return (
         <React.Fragment>
             <Grid container spacing={3}>
-                <Grid item xs={12} md={8} lg={9}>
+                <Grid item xs={12} md={12} lg={12}>
                     <MachineAll/>
                 </Grid>
                 {/*<Grid item xs={12} md={4} lg={3}>*/}
