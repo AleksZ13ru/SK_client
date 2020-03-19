@@ -30,6 +30,7 @@ export default function MachinesCard() {
                         <Fragment>
                             {/*<Divider/>*/}
                             {edges.map((edge, idx) => {
+                                console.log(edge);
                                     return (
                                         <Fragment key={idx}>
                                             <MachineItem

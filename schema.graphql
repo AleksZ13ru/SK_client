@@ -40,11 +40,14 @@ type EventsTypeEdge {
 }
 
 type MachineType implements Node {
+    area: String
     comment: String!
     events(after: String, before: String, first: Int, last: Int, machine_Name: String, services: [ID]): EventsTypeConnection!
     "The ID of the object."
     id: ID!
+    location: String
     name: String!
+    productionArea: ProductionAreaType!
     values(after: String, before: String, day: Date, first: Int, last: Int, machine_Name: String): ValueTypeConnection!
 }
 
@@ -61,6 +64,28 @@ type MachineTypeEdge {
     cursor: String!
     "The item at the end of the edge"
     node: MachineType
+}
+
+type ManufacturingType implements Node {
+    "The ID of the object."
+    id: ID!
+    manufacturing(after: String, before: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): ProductionAreaTypeConnection!
+    name: String!
+}
+
+type ManufacturingTypeConnection {
+    "Contains the nodes in this connection."
+    edges: [ManufacturingTypeEdge]!
+    "Pagination data for this connection."
+    pageInfo: PageInfo!
+}
+
+"A Relay edge containing a `ManufacturingType` and its cursor."
+type ManufacturingTypeEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: ManufacturingType
 }
 
 type Mutation {
@@ -88,6 +113,29 @@ type PageInfo {
     startCursor: String
 }
 
+type ProductionAreaType implements Node {
+    "The ID of the object."
+    id: ID!
+    manufacturing: ManufacturingType!
+    name: String!
+    productionArea(after: String, before: String, comment: String, comment_Icontains: String, comment_Istartswith: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): MachineTypeConnection!
+}
+
+type ProductionAreaTypeConnection {
+    "Contains the nodes in this connection."
+    edges: [ProductionAreaTypeEdge]!
+    "Pagination data for this connection."
+    pageInfo: PageInfo!
+}
+
+"A Relay edge containing a `ProductionAreaType` and its cursor."
+type ProductionAreaTypeEdge {
+    "A cursor for use in pagination"
+    cursor: String!
+    "The item at the end of the edge"
+    node: ProductionAreaType
+}
+
 type Query {
     "The ID of the object"
     event(id: ID!): EventsType
@@ -95,7 +143,13 @@ type Query {
     "The ID of the object"
     machine(id: ID!): MachineType
     machines(after: String, before: String, comment: String, comment_Icontains: String, comment_Istartswith: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): MachineTypeConnection
+    "The ID of the object"
+    manufacturing(id: ID!): ManufacturingType
+    manufacturings(after: String, before: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): ManufacturingTypeConnection
     me: UserType
+    "The ID of the object"
+    productionArea(id: ID!): ProductionAreaType
+    productionAreas(after: String, before: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): ProductionAreaTypeConnection
     "The ID of the object"
     status(id: ID!): StatusType
     statuses(after: String, before: String, first: Int, last: Int, postedBy: ID): StatusTypeConnection

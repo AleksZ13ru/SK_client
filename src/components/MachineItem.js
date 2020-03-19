@@ -82,7 +82,7 @@ export default function MachineItem(props:Props) {
                 </ListItemSecondaryAction>
             </ListItem>
             <Divider/>
-            <DialogMachineBuildAdd open={openDialogBuildAdd} onClose={handleDialogClose}/>
+            <DialogMachineBuildAdd open={openDialogBuildAdd} id={props.id} title={props.title} onClose={handleDialogClose}/>
         </div>
     );
 }

@@ -21,6 +21,17 @@ import {EventTracker} from "@devexpress/dx-react-chart";
 import Button from "@material-ui/core/Button";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Box from "@material-ui/core/Box";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItem from "@material-ui/core/ListItem";
+import List from "@material-ui/core/List";
+import Collapse from "@material-ui/core/Collapse";
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import SendIcon from '@material-ui/icons/Send';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import StarBorder from '@material-ui/icons/StarBorder';
 
 const MACHINES_QUERY = loader('./Machine/MACHINES_QUERY.graphql');
 
@@ -46,6 +57,15 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.text.secondary,
         margin: theme.spacing(1),
     },
+    li3: {
+        width: 3 / 12
+    },
+    li4: {
+        width: 4 / 12
+    },
+    li5: {
+        width: 5 / 12
+    }
 }));
 
 const titleStyle = {
@@ -72,9 +92,174 @@ export default function MachinesPage(props) {
         {service: 'Энергоцех', area: 7},
 
     ];
+    const [open, setOpen] = React.useState(false);
+
+    const handleClick = () => {
+        setOpen(!open);
+    };
     const TitleText = props => <Title.Text {...props} style={titleStyle}/>;
     return (
         <div className={classes.root}>
+            <ExpansionPanel defaultExpanded>
+                <ExpansionPanelSummary
+                    expandIcon={<ExpandMoreIcon/>}
+                    aria-controls="panel2a-content"
+                    aria-label="Expand"
+                    id="panel2a-header"
+                >
+                    <Grid container spacing={2} direction="row" alignItems="baseline">
+                        <Grid item xs={4}>
+                            <Typography className={classes.heading}>Frigeco SLP120 #2</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Typography className={classes.secondaryHeading}>Линия ошланговки</Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                        </Grid>
+                    </Grid>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                    <List
+                        component="nav"
+                        aria-labelledby="nested-list-subheader"
+                        // subheader={
+                        //     <ListSubheader component="div" id="nested-list-subheader">
+                        //         Nested List Items
+                        //     </ListSubheader>
+                        // }
+                        className={classes.root}
+                    >
+                        <ListItem button>
+                            <ListItemIcon>
+                                <SendIcon/>
+                            </ListItemIcon>
+                            <ListItemText className={classes.li3} primary="ПСК" secondary="Цех"/>
+                            <ListItemText className={classes.li3} primary="Иванов И.И." secondary="Участок"/>
+                            <ListItemText className={classes.li3} primary="Петров П.П." secondary="Оператор/Первый номер"/>
+                        </ListItem>
+                        {/*<ListItem button>*/}
+                        {/*    <ListItemIcon>*/}
+                        {/*        <DraftsIcon />*/}
+                        {/*    </ListItemIcon>*/}
+                        {/*    <ListItemText primary="Drafts" />*/}
+                        {/*</ListItem>*/}
+                        <ListItem button onClick={handleClick}>
+                            <ListItemIcon>
+                                <InboxIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary="Оборудование"/>
+                            {open ? <ExpandLess/> : <ExpandMore/>}
+                        </ListItem>
+
+                        <Collapse in={open} timeout="auto" unmountOnExit>
+                            <List className={classes.root} dense>
+                                <ListItem button>
+                                    <ListItemIcon><SendIcon/></ListItemIcon>
+                                    <ListItemText className={classes.li3} primary="Zumbach" secondary="Измеритель диаметра"/>
+                                    <ListItemText className={classes.li3} primary="4587-3345-6758" secondary="Серийный номер"/>
+                                    <ListItemText className={classes.li3} primary="№ 12456676" secondary="Поверка до 30.12.2021"/>
+                                </ListItem>
+                                <ListItem button>
+                                    <ListItemIcon><SendIcon/></ListItemIcon>
+                                    <ListItemText className={classes.li3} primary="Zumbach" secondary="Измеритель диаметра"/>
+                                    <ListItemText className={classes.li3} primary="4587-3345-6758" secondary="Серийный номер"/>
+                                    <ListItemText className={classes.li3} primary="№ 12456676" secondary="Поверка до 30.12.2021"/>
+                                </ListItem>
+                                <ListItem button>
+                                    <ListItemIcon><SendIcon/></ListItemIcon>
+                                    <ListItemText className={classes.li3} primary="Zumbach SparkTester" secondary="ЗАСИ"/>
+                                    <ListItemText className={classes.li3} primary="4587-3345-6758" secondary="Серийный номер"/>
+                                    <ListItemText className={classes.li3} primary="№ 12156676" secondary="Аттестация до 30.12.2021"/>
+                                </ListItem>
+                                <ListItem button>
+                                    <ListItemIcon><SendIcon/></ListItemIcon>
+                                    <ListItemText className={classes.li3} primary="Widendach CS407" secondary="Маркир"/>
+                                    <ListItemText className={classes.li3} primary="4587-3345-6758" secondary="Серийный номер"/>
+                                    <ListItemText className={classes.li3} primary="Белый" secondary="Цвет"/>
+                                </ListItem>
+                            </List>
+                        </Collapse>
+                    </List>
+
+
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel>
+                <ExpansionPanelSummary
+                    expandIcon={<ExpandMoreIcon/>}
+                    aria-controls="panel2a-content"
+                    aria-label="Expand"
+                    id="panel2a-header"
+                >
+                    <Grid container spacing={2} direction="row" alignItems="baseline">
+                        <Grid item xs={4}>
+                            <Typography className={classes.heading}>Ремонты оборудования</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Typography className={classes.secondaryHeading}>3 за сутки</Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Box display="flex" justifyContent="flex-end">
+                                <Button
+                                    color="primary"
+                                    size="small"
+                                    variant="outlined"
+                                    aria-label="Acknowledge"
+                                    onClick={event => event.stopPropagation()}
+                                    onFocus={event => event.stopPropagation()}
+                                >Добавить</Button>
+                            </Box>
+                        </Grid>
+                    </Grid>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                    <Typography>
+                        Таблица ремонтов
+                    </Typography>
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel>
+                <ExpansionPanelSummary
+                    expandIcon={<ExpandMoreIcon/>}
+                    aria-controls="panel3a-content"
+                    id="panel3a-header"
+                >
+                    <Grid container spacing={2} direction="row" alignItems="baseline">
+                        <Grid item xs={4}>
+                            <Typography className={classes.heading}>Простои оборудования</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Typography className={classes.secondaryHeading}>12 часов за неделю</Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Box display="flex" justifyContent="flex-end">
+                                <Button
+                                    color="primary"
+                                    size="small"
+                                    variant="outlined"
+                                    aria-label="Acknowledge"
+                                    onClick={event => event.stopPropagation()}
+                                    onFocus={event => event.stopPropagation()}
+                                >Добавить</Button>
+                            </Box>
+                        </Grid>
+                    </Grid>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                    <Typography>
+                        Список простоев
+                    </Typography>
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel>
+                <ExpansionPanelSummary
+                    expandIcon={<ExpandMoreIcon/>}
+                    aria-controls="panel4a-content"
+                    id="panel4a-header"
+                >
+                    <Typography className={classes.heading}>Планирование производства</Typography>
+                </ExpansionPanelSummary>
+            </ExpansionPanel>
             <ExpansionPanel>
                 <ExpansionPanelSummary
 
@@ -82,10 +267,24 @@ export default function MachinesPage(props) {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                    <Box display="flex" justifyContent="flex-start" style={{width: '100%'}}>
-                        <Typography className={classes.heading}>Frigeco CU</Typography>
-                        <Typography className={classes.secondaryHeading}>Машина волочения</Typography>
-                    </Box>
+                    <Grid container spacing={2} direction="row" alignItems="baseline">
+                        <Grid item xs={4}>
+                            <Typography className={classes.heading}>Frigeco CU</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Typography className={classes.secondaryHeading}>Машина волочения</Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                            {/*<Paper className={classes.paper}>xs=12</Paper>*/}
+                        </Grid>
+                    </Grid>
+                    {/*<Box display="flex" justifyContent="flex-start" style={{width: '100%'}}>*/}
+                    {/*    <Typography className={classes.heading}>Frigeco CU</Typography>*/}
+                    {/*    <Typography className={classes.secondaryHeading}>Машина волочения</Typography>*/}
+                    {/*</Box>*/}
+                    {/*<Box style={{width:'2/12'}}>*/}
+
+                    {/*</Box>*/}
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     <Grid container spacing={3}>
@@ -136,72 +335,6 @@ export default function MachinesPage(props) {
                     </Grid>
 
                 </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel defaultExpanded>
-                <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon/>}
-                    aria-controls="panel2a-content"
-                    aria-label="Expand"
-                    id="panel2a-header"
-                >
-
-
-                    {/*<Typography className={classes.heading}>General settings</Typography>*/}
-                    {/*<Typography className={classes.secondaryHeading}>I am an expansion panel</Typography>*/}
-                    {/*<div style={{width: '100%'}}>*/}
-                        <Box display="flex" justifyContent="flex-start" style={{width: '100%'}}>
-                            <Typography className={classes.heading}>Ремонты оборудования</Typography>
-                            <Typography className={classes.secondaryHeading}>3 за сутки</Typography>
-                        </Box>
-                        <Box display="flex" justifyContent="flex-end">
-                            <Button
-                                color="primary"
-                                size="small"
-                                variant="outlined"
-                                aria-label="Acknowledge"
-                                onClick={event => event.stopPropagation()}
-                                onFocus={event => event.stopPropagation()}
-                            >Добавить</Button>
-                        </Box>
-                    {/*</div>*/}
-                    {/*<Button*/}
-                    {/*    color="primary"*/}
-                    {/*    size="small"*/}
-                    {/*    variant="outlined"*/}
-                    {/*    aria-label="Acknowledge"*/}
-                    {/*    onClick={event => event.stopPropagation()}*/}
-                    {/*    onFocus={event => event.stopPropagation()}*/}
-                    {/*>Добавить</Button>*/}
-
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <Typography>
-                        Таблица ремонтов
-                    </Typography>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel defaultExpanded>
-                <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon/>}
-                    aria-controls="panel3a-content"
-                    id="panel3a-header"
-                >
-                    <Typography className={classes.heading}>Простои: 12 часов</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <Typography>
-                        Список простоев
-                    </Typography>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel>
-                <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon/>}
-                    aria-controls="panel4a-content"
-                    id="panel4a-header"
-                >
-                    <Typography className={classes.heading}>Планирование производства</Typography>
-                </ExpansionPanelSummary>
             </ExpansionPanel>
         </div>
     );

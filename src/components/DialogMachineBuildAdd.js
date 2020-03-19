@@ -12,13 +12,15 @@ import Divider from "@material-ui/core/Divider";
 
 type Props = {
     open: boolean,
+    id:number,
+    title:string,
     // carsSelects: Array<string>,
     // cars: Array<Object>,
     onClose: any
-}
+};
 
 export default function DialogMachineBuildAdd(props: Props) {
-    const [machine, setMachine] = React.useState('');
+    const [machine, setMachine] = React.useState(props.title);
     const [buildDate, setBuildDate] = React.useState(new Date());
     const [timeStart, setTimeStart] = React.useState(new Date());
     const [timeEnd, setTimeEnd] = React.useState(new Date());

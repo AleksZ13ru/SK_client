@@ -5,6 +5,8 @@ query{
                 machine{
                     id
                     name
+                    location
+                    area
                 }
                 value
                 speed
