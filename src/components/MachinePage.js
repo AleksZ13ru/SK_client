@@ -32,8 +32,10 @@ import SendIcon from '@material-ui/icons/Send';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
+import {QueryBuilder} from "@material-ui/icons";
+import {Query} from "react-apollo";
 
-const MACHINES_QUERY = loader('./Machine/MACHINES_QUERY.graphql');
+const MACHINE_QUERY = loader('./Machine/MACHINE_QUERY.graphql');
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -99,243 +101,270 @@ export default function MachinesPage(props) {
     };
     const TitleText = props => <Title.Text {...props} style={titleStyle}/>;
     return (
-        <div className={classes.root}>
-            <ExpansionPanel defaultExpanded>
-                <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon/>}
-                    aria-controls="panel2a-content"
-                    aria-label="Expand"
-                    id="panel2a-header"
-                >
-                    <Grid container spacing={2} direction="row" alignItems="baseline">
-                        <Grid item xs={4}>
-                            <Typography className={classes.heading}>Frigeco SLP120 #2</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography className={classes.secondaryHeading}>Линия ошланговки</Typography>
-                        </Grid>
-                        <Grid item xs={2}>
-                        </Grid>
-                    </Grid>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <List
-                        component="nav"
-                        aria-labelledby="nested-list-subheader"
-                        // subheader={
-                        //     <ListSubheader component="div" id="nested-list-subheader">
-                        //         Nested List Items
-                        //     </ListSubheader>
-                        // }
-                        className={classes.root}
-                    >
-                        <ListItem button>
-                            <ListItemIcon>
-                                <SendIcon/>
-                            </ListItemIcon>
-                            <ListItemText className={classes.li3} primary="ПСК" secondary="Цех"/>
-                            <ListItemText className={classes.li3} primary="Иванов И.И." secondary="Участок"/>
-                            <ListItemText className={classes.li3} primary="Петров П.П." secondary="Оператор/Первый номер"/>
-                        </ListItem>
-                        {/*<ListItem button>*/}
-                        {/*    <ListItemIcon>*/}
-                        {/*        <DraftsIcon />*/}
-                        {/*    </ListItemIcon>*/}
-                        {/*    <ListItemText primary="Drafts" />*/}
-                        {/*</ListItem>*/}
-                        <ListItem button onClick={handleClick}>
-                            <ListItemIcon>
-                                <InboxIcon/>
-                            </ListItemIcon>
-                            <ListItemText primary="Оборудование"/>
-                            {open ? <ExpandLess/> : <ExpandMore/>}
-                        </ListItem>
+        <Query query={MACHINE_QUERY} variables={{"id": props.match.params.id}}>
+            {({loading, error, data}) => {
+                if (loading) return <div>Fetching</div>;
+                if (error) return <div>Не удалось получить ответ от сервера</div>;
+                const machine = data.machine;
+                console.log(machine);
+                return (
+                    <div className={classes.root}>
+                        <ExpansionPanel defaultExpanded>
+                            <ExpansionPanelSummary
+                                expandIcon={<ExpandMoreIcon/>}
+                                aria-controls="panel2a-content"
+                                aria-label="Expand"
+                                id="panel2a-header"
+                            >
+                                <Grid container spacing={2} direction="row" alignItems="baseline">
+                                    <Grid item xs={4}>
+                                        <Typography className={classes.heading}>{machine.name}</Typography>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <Typography className={classes.secondaryHeading}>{machine.category}</Typography>
+                                    </Grid>
+                                    <Grid item xs={2}>
+                                    </Grid>
+                                </Grid>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <List
+                                    component="nav"
+                                    aria-labelledby="nested-list-subheader"
+                                    // subheader={
+                                    //     <ListSubheader component="div" id="nested-list-subheader">
+                                    //         Nested List Items
+                                    //     </ListSubheader>
+                                    // }
+                                    className={classes.root}
+                                >
+                                    <ListItem button>
+                                        <ListItemIcon>
+                                            <SendIcon/>
+                                        </ListItemIcon>
+                                        <ListItemText className={classes.li3} primary={machine.location}
+                                                      secondary="Цех"/>
+                                        <ListItemText className={classes.li3} primary={machine.area}
+                                                      secondary="Участок"/>
+                                        <ListItemText className={classes.li3} primary={"".padEnd(5,'-')}
+                                                      secondary="Оператор/Первый номер"/>
+                                    </ListItem>
+                                    {/*<ListItem button>*/}
+                                    {/*    <ListItemIcon>*/}
+                                    {/*        <DraftsIcon />*/}
+                                    {/*    </ListItemIcon>*/}
+                                    {/*    <ListItemText primary="Drafts" />*/}
+                                    {/*</ListItem>*/}
+                                    <ListItem button onClick={handleClick}>
+                                        <ListItemIcon>
+                                            <InboxIcon/>
+                                        </ListItemIcon>
+                                        <ListItemText primary="Оборудование"/>
+                                        {open ? <ExpandLess/> : <ExpandMore/>}
+                                    </ListItem>
 
-                        <Collapse in={open} timeout="auto" unmountOnExit>
-                            <List className={classes.root} dense>
-                                <ListItem button>
-                                    <ListItemIcon><SendIcon/></ListItemIcon>
-                                    <ListItemText className={classes.li3} primary="Zumbach" secondary="Измеритель диаметра"/>
-                                    <ListItemText className={classes.li3} primary="4587-3345-6758" secondary="Серийный номер"/>
-                                    <ListItemText className={classes.li3} primary="№ 12456676" secondary="Поверка до 30.12.2021"/>
-                                </ListItem>
-                                <ListItem button>
-                                    <ListItemIcon><SendIcon/></ListItemIcon>
-                                    <ListItemText className={classes.li3} primary="Zumbach" secondary="Измеритель диаметра"/>
-                                    <ListItemText className={classes.li3} primary="4587-3345-6758" secondary="Серийный номер"/>
-                                    <ListItemText className={classes.li3} primary="№ 12456676" secondary="Поверка до 30.12.2021"/>
-                                </ListItem>
-                                <ListItem button>
-                                    <ListItemIcon><SendIcon/></ListItemIcon>
-                                    <ListItemText className={classes.li3} primary="Zumbach SparkTester" secondary="ЗАСИ"/>
-                                    <ListItemText className={classes.li3} primary="4587-3345-6758" secondary="Серийный номер"/>
-                                    <ListItemText className={classes.li3} primary="№ 12156676" secondary="Аттестация до 30.12.2021"/>
-                                </ListItem>
-                                <ListItem button>
-                                    <ListItemIcon><SendIcon/></ListItemIcon>
-                                    <ListItemText className={classes.li3} primary="Widendach CS407" secondary="Маркир"/>
-                                    <ListItemText className={classes.li3} primary="4587-3345-6758" secondary="Серийный номер"/>
-                                    <ListItemText className={classes.li3} primary="Белый" secondary="Цвет"/>
-                                </ListItem>
-                            </List>
-                        </Collapse>
-                    </List>
+                                    <Collapse in={open} timeout="auto" unmountOnExit>
+                                        <List className={classes.root} dense>
+                                            <ListItem button>
+                                                <ListItemIcon><SendIcon/></ListItemIcon>
+                                                <ListItemText className={classes.li3} primary="Zumbach"
+                                                              secondary="Измеритель диаметра"/>
+                                                <ListItemText className={classes.li3} primary="4587-3345-6758"
+                                                              secondary="Серийный номер"/>
+                                                <ListItemText className={classes.li3} primary="№ 12456676"
+                                                              secondary="Поверка до 30.12.2021"/>
+                                            </ListItem>
+                                            <ListItem button>
+                                                <ListItemIcon><SendIcon/></ListItemIcon>
+                                                <ListItemText className={classes.li3} primary="Zumbach"
+                                                              secondary="Измеритель диаметра"/>
+                                                <ListItemText className={classes.li3} primary="4587-3345-6758"
+                                                              secondary="Серийный номер"/>
+                                                <ListItemText className={classes.li3} primary="№ 12456676"
+                                                              secondary="Поверка до 30.12.2021"/>
+                                            </ListItem>
+                                            <ListItem button>
+                                                <ListItemIcon><SendIcon/></ListItemIcon>
+                                                <ListItemText className={classes.li3} primary="Zumbach SparkTester"
+                                                              secondary="ЗАСИ"/>
+                                                <ListItemText className={classes.li3} primary="4587-3345-6758"
+                                                              secondary="Серийный номер"/>
+                                                <ListItemText className={classes.li3} primary="№ 12156676"
+                                                              secondary="Аттестация до 30.12.2021"/>
+                                            </ListItem>
+                                            <ListItem button>
+                                                <ListItemIcon><SendIcon/></ListItemIcon>
+                                                <ListItemText className={classes.li3} primary="Widendach CS407"
+                                                              secondary="Маркир"/>
+                                                <ListItemText className={classes.li3} primary="4587-3345-6758"
+                                                              secondary="Серийный номер"/>
+                                                <ListItemText className={classes.li3} primary="Белый" secondary="Цвет"/>
+                                            </ListItem>
+                                        </List>
+                                    </Collapse>
+                                </List>
 
 
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel>
-                <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon/>}
-                    aria-controls="panel2a-content"
-                    aria-label="Expand"
-                    id="panel2a-header"
-                >
-                    <Grid container spacing={2} direction="row" alignItems="baseline">
-                        <Grid item xs={4}>
-                            <Typography className={classes.heading}>Ремонты оборудования</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography className={classes.secondaryHeading}>3 за сутки</Typography>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Box display="flex" justifyContent="flex-end">
-                                <Button
-                                    color="primary"
-                                    size="small"
-                                    variant="outlined"
-                                    aria-label="Acknowledge"
-                                    onClick={event => event.stopPropagation()}
-                                    onFocus={event => event.stopPropagation()}
-                                >Добавить</Button>
-                            </Box>
-                        </Grid>
-                    </Grid>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <Typography>
-                        Таблица ремонтов
-                    </Typography>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel>
-                <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon/>}
-                    aria-controls="panel3a-content"
-                    id="panel3a-header"
-                >
-                    <Grid container spacing={2} direction="row" alignItems="baseline">
-                        <Grid item xs={4}>
-                            <Typography className={classes.heading}>Простои оборудования</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography className={classes.secondaryHeading}>12 часов за неделю</Typography>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <Box display="flex" justifyContent="flex-end">
-                                <Button
-                                    color="primary"
-                                    size="small"
-                                    variant="outlined"
-                                    aria-label="Acknowledge"
-                                    onClick={event => event.stopPropagation()}
-                                    onFocus={event => event.stopPropagation()}
-                                >Добавить</Button>
-                            </Box>
-                        </Grid>
-                    </Grid>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <Typography>
-                        Список простоев
-                    </Typography>
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel>
-                <ExpansionPanelSummary
-                    expandIcon={<ExpandMoreIcon/>}
-                    aria-controls="panel4a-content"
-                    id="panel4a-header"
-                >
-                    <Typography className={classes.heading}>Планирование производства</Typography>
-                </ExpansionPanelSummary>
-            </ExpansionPanel>
-            <ExpansionPanel>
-                <ExpansionPanelSummary
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                        <ExpansionPanel>
+                            <ExpansionPanelSummary
+                                expandIcon={<ExpandMoreIcon/>}
+                                aria-controls="panel2a-content"
+                                aria-label="Expand"
+                                id="panel2a-header"
+                            >
+                                <Grid container spacing={2} direction="row" alignItems="baseline">
+                                    <Grid item xs={4}>
+                                        <Typography className={classes.heading}>Ремонты оборудования</Typography>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <Typography className={classes.secondaryHeading}>3 за сутки</Typography>
+                                    </Grid>
+                                    <Grid item xs={2}>
+                                        <Box display="flex" justifyContent="flex-end">
+                                            <Button
+                                                color="primary"
+                                                size="small"
+                                                variant="outlined"
+                                                aria-label="Acknowledge"
+                                                onClick={event => event.stopPropagation()}
+                                                onFocus={event => event.stopPropagation()}
+                                            >Добавить</Button>
+                                        </Box>
+                                    </Grid>
+                                </Grid>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <Typography>
+                                    Таблица ремонтов
+                                </Typography>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                        <ExpansionPanel>
+                            <ExpansionPanelSummary
+                                expandIcon={<ExpandMoreIcon/>}
+                                aria-controls="panel3a-content"
+                                id="panel3a-header"
+                            >
+                                <Grid container spacing={2} direction="row" alignItems="baseline">
+                                    <Grid item xs={4}>
+                                        <Typography className={classes.heading}>Простои оборудования</Typography>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <Typography className={classes.secondaryHeading}>12 часов за неделю</Typography>
+                                    </Grid>
+                                    <Grid item xs={2}>
+                                        <Box display="flex" justifyContent="flex-end">
+                                            <Button
+                                                color="primary"
+                                                size="small"
+                                                variant="outlined"
+                                                aria-label="Acknowledge"
+                                                onClick={event => event.stopPropagation()}
+                                                onFocus={event => event.stopPropagation()}
+                                            >Добавить</Button>
+                                        </Box>
+                                    </Grid>
+                                </Grid>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <Typography>
+                                    Список простоев
+                                </Typography>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                        <ExpansionPanel>
+                            <ExpansionPanelSummary
+                                expandIcon={<ExpandMoreIcon/>}
+                                aria-controls="panel4a-content"
+                                id="panel4a-header"
+                            >
+                                <Typography className={classes.heading}>Планирование производства</Typography>
+                            </ExpansionPanelSummary>
+                        </ExpansionPanel>
+                        <ExpansionPanel>
+                            <ExpansionPanelSummary
 
-                    expandIcon={<ExpandMoreIcon/>}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                >
-                    <Grid container spacing={2} direction="row" alignItems="baseline">
-                        <Grid item xs={4}>
-                            <Typography className={classes.heading}>Frigeco CU</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography className={classes.secondaryHeading}>Машина волочения</Typography>
-                        </Grid>
-                        <Grid item xs={2}>
-                            {/*<Paper className={classes.paper}>xs=12</Paper>*/}
-                        </Grid>
-                    </Grid>
-                    {/*<Box display="flex" justifyContent="flex-start" style={{width: '100%'}}>*/}
-                    {/*    <Typography className={classes.heading}>Frigeco CU</Typography>*/}
-                    {/*    <Typography className={classes.secondaryHeading}>Машина волочения</Typography>*/}
-                    {/*</Box>*/}
-                    {/*<Box style={{width:'2/12'}}>*/}
+                                expandIcon={<ExpandMoreIcon/>}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Grid container spacing={2} direction="row" alignItems="baseline">
+                                    <Grid item xs={4}>
+                                        <Typography className={classes.heading}>Frigeco CU</Typography>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <Typography className={classes.secondaryHeading}>Машина волочения</Typography>
+                                    </Grid>
+                                    <Grid item xs={2}>
+                                        {/*<Paper className={classes.paper}>xs=12</Paper>*/}
+                                    </Grid>
+                                </Grid>
+                                {/*<Box display="flex" justifyContent="flex-start" style={{width: '100%'}}>*/}
+                                {/*    <Typography className={classes.heading}>Frigeco CU</Typography>*/}
+                                {/*    <Typography className={classes.secondaryHeading}>Машина волочения</Typography>*/}
+                                {/*</Box>*/}
+                                {/*<Box style={{width:'2/12'}}>*/}
 
-                    {/*</Box>*/}
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <Grid container spacing={3}>
-                        <Grid item xs={6}>
-                            <Paper variant="outlined">
-                                <Chart height={250} data={chartDataKMV}>
-                                    <ArgumentAxis/>
-                                    {/*<ValueAxis />*/}
+                                {/*</Box>*/}
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <Grid container spacing={3}>
+                                    <Grid item xs={6}>
+                                        <Paper variant="outlined">
+                                            <Chart height={250} data={chartDataKMV}>
+                                                <ArgumentAxis/>
+                                                {/*<ValueAxis />*/}
 
-                                    <BarSeries
-                                        valueField="population"
-                                        argumentField="year"
-                                    />
-                                    <Title
-                                        text="Коэффицент машинного времени"
-                                        textComponent={TitleText}
-                                    />
-                                    <EventTracker/>
-                                    <Tooltip/>
-                                </Chart>
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Paper variant="outlined">
-                                <Chart height={250} data={chartData}>
-                                    <PieSeries
-                                        valueField="area"
-                                        argumentField="service"
-                                    />
-                                    <Title
-                                        text="Распределение простоев"
-                                        textComponent={TitleText}
-                                    />
-                                    <Legend/>
-                                    <EventTracker/>
-                                    <Tooltip/>
-                                </Chart>
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12}>
-                            {/*<Paper variant="outlined">*/}
-                            <Typography>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                sit amet blandit leo lobortis eget.
-                            </Typography>
-                            {/*</Paper>*/}
-                        </Grid>
-                    </Grid>
+                                                <BarSeries
+                                                    valueField="population"
+                                                    argumentField="year"
+                                                />
+                                                <Title
+                                                    text="Коэффицент машинного времени"
+                                                    textComponent={TitleText}
+                                                />
+                                                <EventTracker/>
+                                                <Tooltip/>
+                                            </Chart>
+                                        </Paper>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <Paper variant="outlined">
+                                            <Chart height={250} data={chartData}>
+                                                <PieSeries
+                                                    valueField="area"
+                                                    argumentField="service"
+                                                />
+                                                <Title
+                                                    text="Распределение простоев"
+                                                    textComponent={TitleText}
+                                                />
+                                                <Legend/>
+                                                <EventTracker/>
+                                                <Tooltip/>
+                                            </Chart>
+                                        </Paper>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        {/*<Paper variant="outlined">*/}
+                                        <Typography>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                                            malesuada lacus ex,
+                                            sit amet blandit leo lobortis eget.
+                                        </Typography>
+                                        {/*</Paper>*/}
+                                    </Grid>
+                                </Grid>
 
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-        </div>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                    </div>
+                )
+            }}
+        </Query>
     );
+
+
 }

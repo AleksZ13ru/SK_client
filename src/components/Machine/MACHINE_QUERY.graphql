@@ -1,0 +1,21 @@
+query Machine($id: ID!){
+    machine(id: $id){
+        id
+        name
+        category
+        area
+        location
+        values{
+            edges{
+                node{
+                    day
+                    value
+                    kmv
+                    speed
+                }
+            }
+        }
+    }
+}
+
+

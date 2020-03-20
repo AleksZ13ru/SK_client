@@ -32,6 +32,8 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import MachinesCard from "../components/MachinesCard";
+import {DatePicker} from "@material-ui/pickers";
+import DialogMachineBuildAdd from "../components/DialogMachineBuildAdd";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -48,7 +50,7 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
     },
     fixedHeight: {
-        height: 270,
+        // height: 500,
     },
     formControl: {
         margin: theme.spacing(1),
@@ -79,15 +81,6 @@ function DialogAddFix(props) {
                     To subscribe to this website, please enter your email address here. We will send updates
                     occasionally.
                 </DialogContentText>
-                {/*<TextField*/}
-                {/*    autoFocus*/}
-                {/*    margin="dense"*/}
-                {/*    id="name"*/}
-                {/*    label="Email Address"*/}
-                {/*    type="email"*/}
-                {/*    fullWidth*/}
-                {/*/>*/}
-
                 <Grid className={classes.dialogColumn} container direction="column" justify="center" spacing={2}>
                     <Grid item fullWidth>
                         <TextField id="outlined-basic" label="Оборудование" variant="outlined"/>
@@ -98,19 +91,7 @@ function DialogAddFix(props) {
                     <Grid item>
                         <TextField id="outlined-basic" label="Описание" variant="outlined" multiline rows="5"/>
                     </Grid>
-                    {/*    {[0, 1, 2].map(value => (*/}
-                    {/*        <Grid key={value} item>*/}
-                    {/*            <Paper className={classes.paper}/>*/}
-                    {/*        </Grid>*/}
-                    {/*    ))}*/}
                 </Grid>
-                {/*<Container component="main" maxWidth="xs">*/}
-                {/*    <div className={classes.dialogColumn}>*/}
-                {/*        <TextField id="outlined-basic" label="Оборудование" variant="outlined"/>*/}
-                {/*        <TextField id="outlined-basic" label="Служба" variant="outlined"/>*/}
-                {/*        <TextField id="outlined-basic" label="Описание" variant="outlined" multiline rows="5"/>*/}
-                {/*    </div>*/}
-                {/*</Container>*/}
             </DialogContent>
             <DialogActions>
                 <Button onClick={props.handleClose} color="primary">
@@ -129,28 +110,28 @@ export default function ViewPage() {
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-    const [open, setOpen] = React.useState(false);
-
+    const [openDialogMachineBuildAdd, setOpenDialogMachineBuildAdd] = React.useState(false);
+    const [date, changeDate] = React.useState(new Date());
     const handleClickAddFix = () => {
-        setOpen(true);
+        setOpenDialogMachineBuildAdd(true);
     };
 
     const handleCloseAddFix = () => {
-        setOpen(false);
+        setOpenDialogMachineBuildAdd(false);
     };
     return (
         <React.Fragment>
             <Grid container spacing={3}>
-                <Grid item xs={12} md={8} lg={9}>
-                    <Card>
+                <Grid item xs={12} md={12} lg={12}>
+                    <Card className={fixedHeightPaper}>
                         <CardHeader
                             title="Оборудование"
-                            // subheader="September 14, 2016"
+                            subheader={date.toLocaleDateString()}
                         />
                         <Divider/>
                         <CardContent>
                             {/*old <Machines/>*/}
-                            <MachinesCard/>
+                            <MachinesCard last={3}/>
                         </CardContent>
                         <Divider/>
                         <CardActions>
@@ -163,19 +144,20 @@ export default function ViewPage() {
                             </Button>
                         </CardActions>
                     </Card>
-                    {/*<Machines/>*/}
-                    {/* <MachineAll/>*/}
-                    {/*<Paper className={fixedHeightPaper}>*/}
-                    {/*    <Machine/>*/}
-                    {/*</Paper>*/}
                 </Grid>
                 {/* Recent Deposits */}
-                <Grid item xs={12} md={4} lg={3}>
-                    <Paper className={fixedHeightPaper}>
-                        {/*<Fix/>*/}
-                        {/*<Deposits/>*/}
-                    </Paper>
-                </Grid>
+                {/*<Grid item xs={12} md={4} lg={3}>*/}
+                {/*    <Card className={fixedHeightPaper}>*/}
+                {/*        <DatePicker*/}
+                {/*            autoOk*/}
+                {/*            // orientation="landscape"*/}
+                {/*            variant="static"*/}
+                {/*            openTo="date"*/}
+                {/*            value={date}*/}
+                {/*            onChange={changeDate}*/}
+                {/*        />*/}
+                {/*    </Card>*/}
+                {/*</Grid>*/}
                 {/* Machine */}
                 <Grid item xs={12}>
                     <Card>
@@ -191,7 +173,6 @@ export default function ViewPage() {
                                 </Button>
                             }
                             title="Ремонты оборудования"
-                            // subheader="Января 30, 2020"
                         />
                         <Divider/>
                         <CardContent>
@@ -208,70 +189,15 @@ export default function ViewPage() {
                             </Button>
                         </CardActions>
                     </Card>
-                    <DialogAddFix open={open} handleClose={handleCloseAddFix}/>
-                    {/*<Dialog open={open} onClose={handleCloseAddFix} aria-labelledby="form-dialog-title">*/}
-                    {/*    <DialogTitle id="form-dialog-title">Добавить ремонт оборудования</DialogTitle>*/}
-                    {/*    <DialogContent>*/}
-                    {/*        /!*<DialogContentText>*!/*/}
-                    {/*        /!*    To subscribe to this website, please enter your email address here. We will send updates*!/*/}
-                    {/*        /!*    occasionally.*!/*/}
-                    {/*        /!*</DialogContentText>*!/*/}
-                    {/*        <InputLabel*/}
-                    {/*            id="demo-simple-select-label"*/}
-                    {/*            fullWidth*/}
-                    {/*        >Оборудование</InputLabel>*/}
-                    {/*        <Select*/}
-                    {/*            labelId="select-machine"*/}
-                    {/*            id="select-machine"*/}
-                    {/*            value={machine}*/}
-                    {/*            fullWidth*/}
-                    {/*            // onChange={handleChange}*/}
-                    {/*        >*/}
-                    {/*            <MenuItem value={10}>Ten</MenuItem>*/}
-                    {/*            <MenuItem value={20}>Twenty</MenuItem>*/}
-                    {/*            <MenuItem value={30}>Thirty</MenuItem>*/}
-                    {/*        </Select>*/}
-                    {/*        <TextField*/}
-                    {/*            autoFocus*/}
-                    {/*            margin="dense"*/}
-                    {/*            id="name"*/}
-                    {/*            label="Оборудование"*/}
-                    {/*            type="text"*/}
-                    {/*            fullWidth*/}
-                    {/*        />*/}
-                    {/*        <TextField*/}
-                    {/*            autoFocus*/}
-                    {/*            margin="dense"*/}
-                    {/*            id="name"*/}
-                    {/*            label="Служба"*/}
-                    {/*            type="text"*/}
-                    {/*            fullWidth*/}
-                    {/*        />*/}
-                    {/*        <TextField*/}
-                    {/*            autoFocus*/}
-                    {/*            margin="dense"*/}
-                    {/*            id="name"*/}
-                    {/*            label="Описание"*/}
-                    {/*            type="text"*/}
-                    {/*            fullWidth*/}
-                    {/*        />*/}
-                    {/*    </DialogContent>*/}
-                    {/*    <DialogActions>*/}
-                    {/*        <Button onClick={handleCloseAddFix} color="primary">*/}
-                    {/*            Cancel*/}
-                    {/*        </Button>*/}
-                    {/*        <Button onClick={handleCloseAddFix} color="primary">*/}
-                    {/*            Subscribe*/}
-                    {/*        </Button>*/}
-                    {/*    </DialogActions>*/}
-                    {/*</Dialog>*/}
+                    {/*<DialogAddFix open={open} handleClose={handleCloseAddFix}/>*/}
                 </Grid>
                 <Grid item xs={12}>
                     <Plan/>
-                    {/*<Paper className={fixedHeightPaper}>*/}
-                    {/*    <Plan/>*/}
-                    {/*</Paper>*/}
                 </Grid>
             </Grid>
+            <DialogMachineBuildAdd open={openDialogMachineBuildAdd}
+                                   onClose={() => {
+                                       setOpenDialogMachineBuildAdd(false);
+                                   }}/>
         </React.Fragment>)
 }

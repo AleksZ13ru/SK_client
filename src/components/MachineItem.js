@@ -32,6 +32,7 @@ const useStyles = makeStyles(theme => ({
 type Props = {
     id:number,
     title:string,
+    category:string,
     speed:number,
     kmv:number
 }
@@ -55,7 +56,7 @@ export default function MachineItem(props:Props) {
                 <ListItemText
                     className={classes.li5}
                     primary={props.title}
-                    secondary={`Линия волочения`}
+                    secondary={props.category}
                 />
                 <ListItemText
                     className={classes.li4}

@@ -1,0 +1,13 @@
+{
+    machines{
+        edges{
+            node{
+                id
+                name
+                category
+                area
+                location
+            }
+        }
+    }
+}

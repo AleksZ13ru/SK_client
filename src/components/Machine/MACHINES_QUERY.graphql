@@ -1,17 +1,22 @@
-query{
-    values{
+query Machines($last:Int){
+    machines(last:$last){
         edges{
             node{
-                machine{
-                    id
-                    name
-                    location
-                    area
+                id
+                name
+                category
+                area
+                location
+                values{
+                    edges{
+                        node{
+                            day
+                            value
+                            kmv
+                            speed
+                        }
+                    }
                 }
-                value
-                speed
-                kmv
-                status
             }
         }
     }
