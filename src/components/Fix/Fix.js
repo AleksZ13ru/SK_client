@@ -1,21 +1,9 @@
 import React from 'react';
-// import Link from '@material-ui/core/Link';
-import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-// import Title from '../Title';
-// import Grid from "@material-ui/core/Grid";
-// import {Pie, PieChart, ResponsiveContainer, Tooltip} from "recharts";
-import {Card} from "@material-ui/core";
-import CardHeader from "@material-ui/core/CardHeader";
-import Divider from "@material-ui/core/Divider";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
-import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 
 // Generate Order Data
 function createData(id, name, time, service) {
@@ -29,39 +17,39 @@ const rows = [
 
 ];
 
-function preventDefault(event) {
-    event.preventDefault();
-}
+// function preventDefault(event) {
+//     event.preventDefault();
+// }
 
-const useStyles = makeStyles(theme => ({
-    seeMore: {
-        marginTop: theme.spacing(3),
-    },
-}));
+// const useStyles = makeStyles(theme => ({
+//     seeMore: {
+//         marginTop: theme.spacing(3),
+//     },
+// }));
 
-const data01 = [
-    {
-        "name": "ОПЭиИТ",
-        "value": 400
-    },
-    {
-        "name": "РМЦ",
-        "value": 300
-    },
-    {
-        "name": "Энерг.",
-        "value": 300
-    },
-    {
-        "name": "Технол.",
-        "value": 200
-    },
-
-];
+// const data01 = [
+//     {
+//         "name": "ОПЭиИТ",
+//         "value": 400
+//     },
+//     {
+//         "name": "РМЦ",
+//         "value": 300
+//     },
+//     {
+//         "name": "Энерг.",
+//         "value": 300
+//     },
+//     {
+//         "name": "Технол.",
+//         "value": 200
+//     },
+//
+// ];
 
 
 export default function Fix() {
-    const classes = useStyles();
+    // const classes = useStyles();
     return (
         <Table size="small">
             <TableHead>

@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {loader} from "graphql.macro";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -9,8 +9,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {
     Chart,
     ArgumentAxis,
-    ValueAxis,
-    LineSeries,
     BarSeries,
     Title,
     Tooltip, PieSeries, Legend
@@ -19,7 +17,6 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import {EventTracker} from "@devexpress/dx-react-chart";
 import Button from "@material-ui/core/Button";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Box from "@material-ui/core/Box";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -27,12 +24,9 @@ import ListItem from "@material-ui/core/ListItem";
 import List from "@material-ui/core/List";
 import Collapse from "@material-ui/core/Collapse";
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
-import {QueryBuilder} from "@material-ui/icons";
 import {Query} from "react-apollo";
 
 const MACHINE_QUERY = loader('./Machine/MACHINE_QUERY.graphql');

@@ -1,37 +1,24 @@
 import React from 'react';
-import Container from "@material-ui/core/Container";
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import {makeStyles} from "@material-ui/core/styles";
-import clsx from "clsx";
-import MachineAll from "../components/Machine/MachineAll";
-import Fix from "../components/Fix/Fix";
-import Plan from "../components/Plan/Plan";
 import CardHeader from "@material-ui/core/CardHeader";
 import Divider from "@material-ui/core/Divider";
 import CardContent from "@material-ui/core/CardContent";
 import MachinesCard from "../components/MachinesCard";
-import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
-import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import {Card} from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
-    paper: {
-        padding: theme.spacing(2),
-        display: 'flex',
-        overflow: 'auto',
-        flexDirection: 'column',
-    },
-    fixedHeight: {
-        height: 270,
-    }
-}));
+// const useStyles = makeStyles(theme => ({
+//     paper: {
+//         padding: theme.spacing(2),
+//         display: 'flex',
+//         overflow: 'auto',
+//         flexDirection: 'column',
+//     },
+//     fixedHeight: {
+//         height: 270,
+//     }
+// }));
 
 export default function MachinesPage() {
-
-    const classes = useStyles();
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     return (
         <React.Fragment>

@@ -8,9 +8,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Divider from "@material-ui/core/Divider";
 import BuildIcon from '@material-ui/icons/Build';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import DialogMachineBuildAdd from "./DialogMachineBuildAdd";
-import {string} from "prop-types";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -50,9 +48,9 @@ export default function MachineItem(props:Props) {
             <ListItem
                 button
                 component={Link} to={`/machine/${props.id}`}>
-                <ListItemIcon>
+                {/*<ListItemIcon>*/}
 
-                </ListItemIcon>
+                {/*</ListItemIcon>*/}
                 <ListItemText
                     className={classes.li5}
                     primary={props.title}

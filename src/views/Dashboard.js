@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import clsx from 'clsx';
-// import {makeStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
@@ -10,22 +9,16 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-// import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
-// import Grid from '@material-ui/core/Grid';
-// import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
-// import {Link as RouterLink} from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-// import MoreIcon from '@material-ui/icons/MoreVert';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import {mainListItems, secondaryListItems} from './listItems';
 import {withRouter} from 'react-router'
 import {withStyles} from "@material-ui/core/styles";
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import ViewPage from "./ViewPage";
 import MachinesPage from "./MachinesPage";
 import SignInPage from "./SignInPage";
@@ -33,18 +26,6 @@ import {AUTH_TOKEN} from '../constants';
 import {Query} from 'react-apollo';
 import {loader} from 'graphql.macro';
 import MachinePage from "../components/MachinePage";
-// import Chart from '../components/Chart';
-// import Deposits from '../components/Deposits';
-// import Orders from '../components/Orders';
-// import Title from "../components/Title";
-// import TableContainer from "@material-ui/core/TableContainer";
-// import Table from "@material-ui/core/Table";
-// import TableHead from "@material-ui/core/TableHead";
-// import TableRow from "@material-ui/core/TableRow";
-// import TableCell from "@material-ui/core/TableCell";
-// import TableBody from "@material-ui/core/TableBody";
-// import Machines from "../components/Machine/Machines";
-// import Button from "@material-ui/core/Button";
 
 
 function Copyright() {
@@ -187,8 +168,8 @@ class Dashboard extends Component {
                             <Box display="flex" className={classes.menuRight}>
                                 <Query query={ME_QUERY}>
                                     {({loading, error, data}) => {
-                                        if (loading) return <div>Loading</div>
-                                        if (error) return <div>Error</div>
+                                        if (loading) return <div>Loading</div>;
+                                        if (error) return <div>Error</div>;
                                         const username = data.me.username;
 
                                         return (
