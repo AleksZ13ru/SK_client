@@ -1,13 +1,24 @@
-{
-    machines{
-        edges{
-            node{
-                id
-                name
-                category
-                area
-                location
-            }
+#{
+#    machines{
+#        edges{
+#            node{
+#                id
+#                name
+#                category
+#                area
+#                location
+#            }
+#        }
+#    }
+#}
+
+query Machines{
+    allMachine{
+        id
+        name
+        #        category
+        district {
+            name
         }
     }
 }

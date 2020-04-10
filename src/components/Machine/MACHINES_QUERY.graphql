@@ -1,23 +1,40 @@
+#query Machines($last:Int){
+#    machines(last:$last){
+#        edges{
+#            node{
+#                id
+#                name
+#                category
+#                area
+#                location
+#                values{
+#                    edges{
+#                        node{
+#                            day
+#                            value
+#                            kmv
+#                            speed
+#                        }
+#                    }
+#                }
+#            }
+#        }
+#    }
+#}
+
 query Machines($last:Int){
-    machines(last:$last){
-        edges{
-            node{
-                id
-                name
-                category
-                area
-                location
-                values{
-                    edges{
-                        node{
-                            day
-                            value
-                            kmv
-                            speed
-                        }
-                    }
-                }
-            }
+    allMachine(last:$last){
+        id
+        name
+#        category
+        district {
+            name
+        }
+        trends{
+            day
+            value
+            kmv
+            speed
         }
     }
 }

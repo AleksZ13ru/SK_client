@@ -29,7 +29,8 @@ export default function MachinesCard(props:Props) {
                 {({loading, error, data}) => {
                     if (loading) return <div>Fetching</div>;
                     if (error) return <div>Error</div>;
-                    const edges = data.machines.edges;
+                    const edges = data.allMachine;
+                    console.log(edges);
                     return (
                         <Fragment>
                             {/*<Divider/>*/}
@@ -38,9 +39,9 @@ export default function MachinesCard(props:Props) {
                                     return (
                                         <Fragment key={idx}>
                                             <MachineItem
-                                                id={edge.node.id}
-                                                title={edge.node.name}
-                                                category={edge.node.category}
+                                                id={edge.id}
+                                                title={edge.name}
+                                                category={'Тип=Волочилка'}
                                                 speed={0}
                                                 kmv={0}
                                             />

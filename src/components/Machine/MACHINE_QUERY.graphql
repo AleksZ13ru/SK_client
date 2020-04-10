@@ -1,21 +1,36 @@
-query Machine($id: ID!){
-    machine(id: $id){
+#query Machine($id: ID!){
+#    machine(id: $id){
+#        id
+#        name
+#        category
+#        area
+#        location
+#        values{
+#            edges{
+#                node{
+#                    day
+#                    value
+#                    kmv
+#                    speed
+#                }
+#            }
+#        }
+#    }
+#}
+
+query Machine($id:ID!){
+    machine(id:$id){
         id
         name
-        category
-        area
-        location
-        values{
-            edges{
-                node{
-                    day
-                    value
-                    kmv
-                    speed
-                }
-            }
+        #        category
+        district {
+            name
+        }
+        trends{
+            day
+            value
+            kmv
+            speed
         }
     }
 }
-
-

@@ -5,227 +5,77 @@ schema {
     mutation: Mutation
 }
 
-"An object with an ID"
-interface Node {
-    "The ID of the object."
+type ActionType {
+    datetime: DateTime!
     id: ID!
+    modify: ActionModify!
+    note: NoteType!
+    param: String
+    user: UserType
 }
 
-type BuildType implements Node {
-    comment: String
+type AddNote {
+    errors: [String]!
+    note: NoteType
+    ok: Boolean!
+}
+
+type ChartSpeedType {
+    day: Date!
+    id: ID!
+    kmv: Int
+    machine: MachineType!
+    speed: Int
+    value: String!
+}
+
+type MachineType {
+    chartspeedSet: [ChartSpeedType!]!
+    district: SectorType!
+    id: ID!
+    machines: [NoteType!]!
+    name: String!
+    trends: [ChartSpeedType]
+}
+
+type Mutation {
+    addNote(input: AddNoteInput!): AddNote
+}
+
+type NoteType {
+    actions: [ActionType]
     date: Date!
-    "The ID of the object."
     id: ID!
     machine: MachineType!
-    postedBy: UserType
+    notes: [ActionType!]!
     text: String!
     timeEnd: Time!
     timeStart: Time!
 }
 
-type BuildTypeConnection {
-    "Contains the nodes in this connection."
-    edges: [BuildTypeEdge]!
-    "Pagination data for this connection."
-    pageInfo: PageInfo!
-}
-
-"A Relay edge containing a `BuildType` and its cursor."
-type BuildTypeEdge {
-    "A cursor for use in pagination"
-    cursor: String!
-    "The item at the end of the edge"
-    node: BuildType
-}
-
-type CreateUser {
-    user: UserType
-}
-
-type EventsType implements Node {
-    "The ID of the object."
-    id: ID!
-    machine: MachineType!
-    postedBy: UserType
-    statuses(after: String, before: String, first: Int, last: Int, postedBy: ID): StatusTypeConnection!
-    text: String!
-}
-
-type EventsTypeConnection {
-    "Contains the nodes in this connection."
-    edges: [EventsTypeEdge]!
-    "Pagination data for this connection."
-    pageInfo: PageInfo!
-}
-
-"A Relay edge containing a `EventsType` and its cursor."
-type EventsTypeEdge {
-    "A cursor for use in pagination"
-    cursor: String!
-    "The item at the end of the edge"
-    node: EventsType
-}
-
-type MachineType implements Node {
-    area: String
-    builds(after: String, before: String, buildServices: [ID], first: Int, last: Int, machine_Name: String): BuildTypeConnection!
-    category: String
-    comment: String!
-    events(after: String, before: String, first: Int, last: Int, machine_Name: String, services: [ID]): EventsTypeConnection!
-    "The ID of the object."
-    id: ID!
-    location: String
-    name: String!
-    productionArea: ProductionAreaType!
-    values(after: String, before: String, day: Date, first: Int, last: Int, machine_Name: String): ValueTypeConnection!
-}
-
-type MachineTypeConnection {
-    "Contains the nodes in this connection."
-    edges: [MachineTypeEdge]!
-    "Pagination data for this connection."
-    pageInfo: PageInfo!
-}
-
-"A Relay edge containing a `MachineType` and its cursor."
-type MachineTypeEdge {
-    "A cursor for use in pagination"
-    cursor: String!
-    "The item at the end of the edge"
-    node: MachineType
-}
-
-type ManufacturingType implements Node {
-    "The ID of the object."
-    id: ID!
-    manufacturing(after: String, before: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): ProductionAreaTypeConnection!
-    name: String!
-}
-
-type ManufacturingTypeConnection {
-    "Contains the nodes in this connection."
-    edges: [ManufacturingTypeEdge]!
-    "Pagination data for this connection."
-    pageInfo: PageInfo!
-}
-
-"A Relay edge containing a `ManufacturingType` and its cursor."
-type ManufacturingTypeEdge {
-    "A cursor for use in pagination"
-    cursor: String!
-    "The item at the end of the edge"
-    node: ManufacturingType
-}
-
-type Mutation {
-    createUser(email: String!, password: String!, username: String!): CreateUser
-    refreshToken(token: String!): Refresh
-    "Obtain JSON Web Token mutation"
-    tokenAuth(password: String!, username: String!): ObtainJSONWebToken
-    verifyToken(token: String!): Verify
-}
-
-"Obtain JSON Web Token mutation"
-type ObtainJSONWebToken {
-    token: String
-}
-
-"The Relay compliant `PageInfo` type, containing data necessary to paginate this connection."
-type PageInfo {
-    "When paginating forwards, the cursor to continue."
-    endCursor: String
-    "When paginating forwards, are there more items?"
-    hasNextPage: Boolean!
-    "When paginating backwards, are there more items?"
-    hasPreviousPage: Boolean!
-    "When paginating backwards, the cursor to continue."
-    startCursor: String
-}
-
-type ProductionAreaType implements Node {
-    "The ID of the object."
-    id: ID!
-    manufacturing: ManufacturingType!
-    name: String!
-    productionArea(after: String, before: String, comment: String, comment_Icontains: String, comment_Istartswith: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String, values_Day: Date): MachineTypeConnection!
-}
-
-type ProductionAreaTypeConnection {
-    "Contains the nodes in this connection."
-    edges: [ProductionAreaTypeEdge]!
-    "Pagination data for this connection."
-    pageInfo: PageInfo!
-}
-
-"A Relay edge containing a `ProductionAreaType` and its cursor."
-type ProductionAreaTypeEdge {
-    "A cursor for use in pagination"
-    cursor: String!
-    "The item at the end of the edge"
-    node: ProductionAreaType
-}
-
 type Query {
-    "The ID of the object"
-    build(id: ID!): BuildType
-    builds(after: String, before: String, buildServices: [ID], first: Int, last: Int, machine_Name: String): BuildTypeConnection
-    "The ID of the object"
-    event(id: ID!): EventsType
-    events(after: String, before: String, first: Int, last: Int, machine_Name: String, services: [ID]): EventsTypeConnection
-    "The ID of the object"
-    machine(id: ID!): MachineType
-    machines(after: String, before: String, comment: String, comment_Icontains: String, comment_Istartswith: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String, values_Day: Date): MachineTypeConnection
-    "The ID of the object"
-    manufacturing(id: ID!): ManufacturingType
-    manufacturings(after: String, before: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): ManufacturingTypeConnection
-    me: UserType
-    "The ID of the object"
-    productionArea(id: ID!): ProductionAreaType
-    productionAreas(after: String, before: String, first: Int, last: Int, name: String, name_Icontains: String, name_Istartswith: String): ProductionAreaTypeConnection
-    "The ID of the object"
-    status(id: ID!): StatusType
-    statuses(after: String, before: String, first: Int, last: Int, postedBy: ID): StatusTypeConnection
-    users: [UserType]
-    "The ID of the object"
-    value(id: ID!): ValueType
-    values(after: String, before: String, day: Date, first: Int, last: Int, machine_Name: String): ValueTypeConnection
+    action(id: Int): ActionType
+    allAction: [ActionType]
+    allMachine(last: Int): [MachineType]
+    allNote: [NoteType]
+    allSector: [SectorType]
+    allTrend: [ChartSpeedType]
+    machine(id: Int, name: String): MachineType
+    note(id: Int, name: String): NoteType
+    sector(id: Int, name: String): SectorType
+    trend(id: Int): ChartSpeedType
 }
 
-type Refresh {
-    payload: GenericScalar
-    token: String
-}
-
-type StatusType implements Node {
-    comment: String!
-    event: EventsType!
-    "The ID of the object."
+type SectorType {
     id: ID!
-    postedBy: UserType
-    postedDatetime: DateTime!
-    text: String!
-}
-
-type StatusTypeConnection {
-    "Contains the nodes in this connection."
-    edges: [StatusTypeEdge]!
-    "Pagination data for this connection."
-    pageInfo: PageInfo!
-}
-
-"A Relay edge containing a `StatusType` and its cursor."
-type StatusTypeEdge {
-    "A cursor for use in pagination"
-    cursor: String!
-    "The item at the end of the edge"
-    node: StatusType
+    machines: [MachineType!]!
+    name: String!
 }
 
 type UserType {
-    buildSet(after: String, before: String, buildServices: [ID], first: Int, last: Int, machine_Name: String): BuildTypeConnection!
+    actionSet: [ActionType!]!
     dateJoined: DateTime!
     email: String!
-    eventSet(after: String, before: String, first: Int, last: Int, machine_Name: String, services: [ID]): EventsTypeConnection!
     firstName: String!
     id: ID!
     "Designates whether this user should be treated as active. Unselect this instead of deleting accounts."
@@ -237,39 +87,28 @@ type UserType {
     lastLogin: DateTime
     lastName: String!
     password: String!
-    statusSet(after: String, before: String, first: Int, last: Int, postedBy: ID): StatusTypeConnection!
     "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
     username: String!
 }
 
-type ValueType implements Node {
-    day: Date!
-    "The ID of the object."
-    id: ID!
-    kmv: Float
-    machine: MachineType!
-    speed: Int
-    status: String
-    value: String!
+"An enumeration."
+enum ActionModify {
+    #dead
+    DEAD
+    #edit
+    EDIT
+    #posted
+    POSTED
+    #valid
+    VALID
 }
 
-type ValueTypeConnection {
-    "Contains the nodes in this connection."
-    edges: [ValueTypeEdge]!
-    "Pagination data for this connection."
-    pageInfo: PageInfo!
-}
-
-"A Relay edge containing a `ValueType` and its cursor."
-type ValueTypeEdge {
-    "A cursor for use in pagination"
-    cursor: String!
-    "The item at the end of the edge"
-    node: ValueType
-}
-
-type Verify {
-    payload: GenericScalar
+input AddNoteInput {
+    date: Date
+    machineId: ID
+    text: String
+    timeEnd: Time
+    timeStart: Time
 }
 
 
@@ -281,13 +120,6 @@ value as specified by
 scalar Date
 
 """
-The `DateTime` scalar type represents a DateTime
-value as specified by
-[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
-"""
-scalar DateTime
-
-"""
 The `Time` scalar type represents a Time value as
 specified by
 [iso8601](https://en.wikipedia.org/wiki/ISO_8601).
@@ -295,8 +127,8 @@ specified by
 scalar Time
 
 """
-The `GenericScalar` scalar type represents a generic
-GraphQL scalar value that could be:
-String, Boolean, Int, Float, List or Object.
+The `DateTime` scalar type represents a DateTime
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
 """
-scalar GenericScalar
+scalar DateTime

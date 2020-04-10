@@ -11,8 +11,10 @@ import Button from "@material-ui/core/Button";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {loader} from "graphql.macro";
 import {Query} from "react-apollo";
+import {Mutation} from "@apollo/react-components";
 
 const MACHINES_QUERY = loader('./Machine/MACHINES_QUERY_DIALOG_ADD.graphql');
+const ADD_NOTE = loader('./Mutation/ADD_NOTE.graphql');
 
 type Props = {
     open: boolean,
@@ -120,8 +122,8 @@ export default function DialogMachineBuildAdd(props: Props) {
                             defaultValue={timeSlots[2]}
                             options={timeSlots}
                             getOptionDisabled={option => option}
-                            style={{ width: 300 }}
-                            renderInput={params => <TextField {...params} label="Продолж." variant="outlined" />}
+                            style={{width: 300}}
+                            renderInput={params => <TextField {...params} label="Продолж." variant="outlined"/>}
                         />
                     </Grid>
                     <Grid item xs={4} container justify="space-around">
@@ -155,16 +157,16 @@ export default function DialogMachineBuildAdd(props: Props) {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <Query query={MACHINES_QUERY} variables={{"last": props.last}}>
+                        <Query query={MACHINES_QUERY}>
                             {({loading, error, data}) => {
                                 if (loading) return <div>Fetching</div>;
                                 if (error) return <div>Error</div>;
-                                const edges = data.machines.edges;
+                                const edges = data.allMachine;
                                 let current = null;
                                 if (props.id !== undefined) {
-                                    current = edges.find(x => x.node.id === props.id);
-                                    setName(current.node.name);
-                                    setId(current.node.id);
+                                    current = edges.find(x => x.id === props.id);
+                                    setName(current.name);
+                                    setId(current.id);
                                 }
                                 return (
                                     <div>
@@ -174,11 +176,11 @@ export default function DialogMachineBuildAdd(props: Props) {
                                             defaultValue={current}
                                             options={machines}
                                             disabled={current !== null}
-                                            getOptionLabel={option => option.node.name}
+                                            getOptionLabel={option => option.name}
                                             renderInput={params => <TextField {...params}
                                                                               label="Оборудование"
                                                                               variant="outlined"
-                                                                              // value={name}
+                                                // value={name}
                                                 // onChange={(event) => {
                                                 //     setName(event.target.value);
                                                 //     console.log(event.target.value, '---3---')
@@ -186,9 +188,9 @@ export default function DialogMachineBuildAdd(props: Props) {
                                             />}
                                             onChange={(e, v, p) => {
                                                 if (v !== null) {
-                                                    setName(v.node.name);
-                                                    setId(v.node.id);
-                                                }else{
+                                                    setName(v.name);
+                                                    setId(v.id);
+                                                } else {
                                                     setName(null);
                                                     setId(null);
                                                 }
@@ -225,9 +227,23 @@ export default function DialogMachineBuildAdd(props: Props) {
                 <Button onClick={handleClose} color="primary">
                     Отмена
                 </Button>
-                <Button  onClick={handleAdd} color="primary">
-                    Добавить
-                </Button>
+                <Mutation
+                    mutation={ADD_NOTE}
+                    variables={{
+                        "machineID": id,
+                        "text": text,
+                        "date": "2020-04-09",
+                        "timeStart": "10:20:03",
+                        "timeEnd": "10:20:03"
+                    }}
+                    onCompleted={() => props.onClose()}
+                >
+                    {/*<Button onClick={handleAdd} color="primary">*/}
+                    {/*    Добавить*/}
+                    {/*</Button>*/}
+                    {addNone => <Button onClick={addNone} color="primary">Добавить</Button>}
+                </Mutation>
+
             </DialogActions>
         </Dialog>
     )

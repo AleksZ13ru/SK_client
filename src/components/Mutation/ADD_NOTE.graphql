@@ -1,0 +1,13 @@
+mutation AddNote($machineID:ID, $text:String, $date:Date, $timeStart:Time, $timeEnd:Time){
+    addNote(input:{
+        machineId:$machineID,
+        text:$text,
+        date:$date,
+        timeStart:$timeStart,
+        timeEnd:$timeEnd
+    }){
+        note{
+            id
+        }
+    }
+}
